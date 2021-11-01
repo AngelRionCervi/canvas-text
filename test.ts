@@ -12,7 +12,7 @@ const optionModel = {
         document.body.style.cursor = 'pointer';
       },
       onMouseLeave: () => {
-        document.body.style.cursor = 'default';
+        document.body.style.cursor = 'auto';
       }
     },
     {

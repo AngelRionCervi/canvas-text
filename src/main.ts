@@ -1,5 +1,5 @@
 import { UNDERLINE_DISTANCE_FROM_BOTTOM, UNDERLINE_HEIGHT } from "./constants";
-import { Listeners, PositionInPx, Styles, TextModel, TextNode } from "./types";
+import { Listeners, Position, PositionInPx, Styles, TextModel, TextNode } from "./types";
 import { createBuffer } from "./utils/buffer";
 import { convertUnitInPx } from "./utils/unitConversion";
 
@@ -13,8 +13,7 @@ const defaultCommonStyles = {
   fontSize: "30px",
 } as Styles;
 
-const getPositions = (styles: Styles, fontSize: number) => {
-  const { position } = styles;
+const getPositionInPx = (position: Position, fontSize: number) => {
   return [position.x, position.y].map((pos) => convertUnitInPx(pos) + fontSize);
 };
 
@@ -77,9 +76,9 @@ const renderTextNode = (
 ) => {
   const { value, styles: nodeStyles, ...listeners } = textNode;
   const styles = { ...defaultStyles, ...nodeStyles };
-  const { color, font, fontSize, bold, italic, underline } = styles;
+  const { position, color, font, fontSize, bold, italic, underline } = styles;
   const fontSizeInPx = convertUnitInPx(fontSize);
-  const [x, y] = getPositions(styles, fontSizeInPx);
+  const [x, y] = getPositionInPx(position, fontSizeInPx);
 
   ctx.font = `${bold ? "bold " : ""}${italic ? "italic " : ""}${fontSizeInPx}px ${font}`;
   ctx.fillStyle = color;
