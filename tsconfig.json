@@ -1,0 +1,19 @@
+{
+  "compilerOptions": {
+    "target": "es5",
+    "useDefineForClassFields": true,
+    "module": "amd",
+    "lib": ["ESNext", "dom"],
+    "moduleResolution": "Node",
+    "strict": true,
+    "sourceMap": true,
+    "resolveJsonModule": true,
+    "esModuleInterop": true,
+    "noUnusedLocals": true,
+    "noUnusedParameters": true,
+    "noImplicitReturns": true,
+    "outFile": "./dist/main.js",            
+    "rootDir": "./src",   
+  },
+  "include": ["./src"]
+}
