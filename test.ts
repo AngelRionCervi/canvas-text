@@ -6,6 +6,13 @@ const optionModel = {
       value: "hey it's some text ey",
       styles: {
         underline: true,
+      },
+      onClick: () => console.log("hey"),
+      onMouseEnter: () => {
+        document.body.style.cursor = 'pointer';
+      },
+      onMouseLeave: () => {
+        document.body.style.cursor = 'default';
       }
     },
     {
@@ -42,7 +49,7 @@ const optionModel = {
 // }
 
 
-const WIDTH = 300;
+const WIDTH = 500;
 const HEIGHT = 200;
 
 const renderer = document.getElementById('canvas') as HTMLCanvasElement;
@@ -51,7 +58,7 @@ renderer.height = HEIGHT;
 const rendererCtx = renderer?.getContext('2d');
 
 
-const text1 = createTextBuffer(WIDTH, HEIGHT, optionModel);
+const text1 = createTextBuffer(WIDTH, HEIGHT, optionModel, renderer);
 //const text2 = createTextBuffer(WIDTH, HEIGHT, optionModel2);
 
 console.log(text1)
