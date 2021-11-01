@@ -14,6 +14,8 @@
     "noImplicitReturns": true,
     "outFile": "./dist/main.js",            
     "rootDir": "./src",   
+    "declaration": true,
+    "declarationMap": true, 
   },
   "include": ["./src"]
 }
