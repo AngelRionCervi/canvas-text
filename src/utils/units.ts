@@ -1,3 +1,4 @@
+import { BOLD_UNDERLINE_DIVIDER, REGULAR_UNDERLINE_DIVIDER, UNDERLINE_DISTANCE_FROM_BOTTOM } from "../constants";
 import { Position, Unit, ValueAndUnit } from "../types";
 
 const convertRemToPixels = (rem: number) => {
@@ -14,7 +15,7 @@ const getValueAndUnit = (str: string): [number, Unit] => {
 };
 
 export const convertUnitInPx = (valueAndUnit: ValueAndUnit) => {
-  if (typeof valueAndUnit === 'number') return valueAndUnit;
+  if (typeof valueAndUnit === "number") return valueAndUnit;
 
   const [value, unit] = getValueAndUnit(valueAndUnit);
   const unitMap = {
@@ -26,5 +27,14 @@ export const convertUnitInPx = (valueAndUnit: ValueAndUnit) => {
 };
 
 export const getPositionInPx = (position: Position, fontSize: number) => {
-  return [position.x, position.y].map((pos) => convertUnitInPx(pos) + fontSize);
+  return [position.x, position.y].map((pos, index) => convertUnitInPx(pos) + (index ? fontSize : 0));
+};
+
+export const getUnderlineHeight = (fontSizeInPx: number, bold: boolean) => {
+  return fontSizeInPx / (bold ? BOLD_UNDERLINE_DIVIDER : REGULAR_UNDERLINE_DIVIDER);
+}
+  
+export const getFullTextHeight = (fontSizeInPx: number, underline: boolean, bold: boolean) => {
+  if (!underline) return fontSizeInPx;
+  return fontSizeInPx + UNDERLINE_DISTANCE_FROM_BOTTOM + getUnderlineHeight(fontSizeInPx, bold);
 };

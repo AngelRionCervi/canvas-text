@@ -1,12 +1,14 @@
-import { UNDERLINE_DISTANCE_FROM_BOTTOM, UNDERLINE_HEIGHT } from "./constants";
 import { Listeners, PositionInPx } from "./types";
+import { getFullTextHeight } from "./utils/units"
 
 export const handleListeners = (
   listeners: Listeners,
   textRelativePos: PositionInPx,
   renderer: HTMLCanvasElement,
   textWidth: number,
-  fontSizeInPx: number
+  fontSizeInPx: number,
+  underline: boolean,
+  bold: boolean,
 ) => {
   const { onClick, onMouseEnter, onMouseLeave } = listeners;
   const rendererRect = renderer.getBoundingClientRect();
@@ -20,7 +22,7 @@ export const handleListeners = (
       clientX >= docPos.x &&
       clientY >= docPos.y &&
       clientX <= docPos.x + textWidth &&
-      clientY <= docPos.y + fontSizeInPx + UNDERLINE_HEIGHT(fontSizeInPx) + UNDERLINE_DISTANCE_FROM_BOTTOM
+      clientY <= docPos.y + getFullTextHeight(fontSizeInPx, underline, bold)
     );
   };
 

@@ -1,6 +1,7 @@
 declare module "constants" {
     export const UNDERLINE_DISTANCE_FROM_BOTTOM = 3;
-    export const UNDERLINE_HEIGHT: (fontSizeInPx: number) => number;
+    export const BOLD_UNDERLINE_DIVIDER = 13;
+    export const REGULAR_UNDERLINE_DIVIDER = 15;
 }
 declare module "types" {
     export type Unit = "px" | "rem";
@@ -39,20 +40,22 @@ declare module "types" {
         commonStyles?: Partial<Styles>;
     }
 }
+declare module "utils/units" {
+    import { Position, ValueAndUnit } from "types";
+    export const convertUnitInPx: (valueAndUnit: ValueAndUnit) => number;
+    export const getPositionInPx: (position: Position, fontSize: number) => number[];
+    export const getUnderlineHeight: (fontSizeInPx: number, bold: boolean) => number;
+    export const getFullTextHeight: (fontSizeInPx: number, underline: boolean, bold: boolean) => number;
+}
 declare module "listeners" {
     import { Listeners, PositionInPx } from "types";
-    export const handleListeners: (listeners: Listeners, textRelativePos: PositionInPx, renderer: HTMLCanvasElement, textWidth: number, fontSizeInPx: number) => void;
+    export const handleListeners: (listeners: Listeners, textRelativePos: PositionInPx, renderer: HTMLCanvasElement, textWidth: number, fontSizeInPx: number, underline: boolean, bold: boolean) => void;
 }
 declare module "utils/buffer" {
     export const createBuffer: (width: number, height: number) => {
         canvas: HTMLCanvasElement;
         ctx: CanvasRenderingContext2D;
     };
-}
-declare module "utils/unitConversion" {
-    import { Position, ValueAndUnit } from "types";
-    export const convertUnitInPx: (valueAndUnit: ValueAndUnit) => number;
-    export const getPositionInPx: (position: Position, fontSize: number) => number[];
 }
 declare module "rendering" {
     import { TextModel } from "types";
@@ -61,6 +64,7 @@ declare module "rendering" {
 declare module "main" {
     import { createTextBuffer } from "rendering";
     export { createBuffer } from "utils/buffer";
+    export { getFullTextHeight } from "utils/units";
     export default createTextBuffer;
 }
 //# sourceMappingURL=main.d.ts.map

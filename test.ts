@@ -18,8 +18,8 @@ const optionModel = {
     {
       value: "some other text",
       styles: {
-        underline: false,
-        position: { x: '0.5rem', y: '5rem' },
+        underline: true,
+        position: { x: '0rem', y: '5rem' },
         bold: true,
       }
     }
@@ -37,5 +37,4 @@ const rendererCtx = renderer?.getContext('2d');
 
 const text1 = createTextBuffer(WIDTH, HEIGHT, optionModel, renderer);
 
-console.log(text1)
 rendererCtx?.drawImage(text1, 0, 0);

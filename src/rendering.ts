@@ -1,8 +1,8 @@
-import { UNDERLINE_DISTANCE_FROM_BOTTOM, UNDERLINE_HEIGHT } from "./constants";
+import { UNDERLINE_DISTANCE_FROM_BOTTOM } from "./constants";
 import { handleListeners } from "./listeners";
 import { PositionInPx, Styles, TextModel, TextNode } from "./types";
 import { createBuffer } from "./utils/buffer";
-import { convertUnitInPx, getPositionInPx } from "./utils/unitConversion";
+import { convertUnitInPx, getPositionInPx, getUnderlineHeight } from "./utils/units"
 
 const defaultCommonStyles = {
   position: { x: "0px", y: "0px" },
@@ -18,9 +18,10 @@ const renderUnderline = (
   ctx: CanvasRenderingContext2D,
   { x, y }: PositionInPx,
   textWidth: number,
-  fontSizeInPx: number
+  fontSizeInPx: number,
+  bold: boolean
 ) => {
-  ctx.fillRect(x, y + UNDERLINE_DISTANCE_FROM_BOTTOM, textWidth, UNDERLINE_HEIGHT(fontSizeInPx));
+  ctx.fillRect(x, y + UNDERLINE_DISTANCE_FROM_BOTTOM, textWidth, getUnderlineHeight(fontSizeInPx, bold));
 };
 
 const renderTextNode = (
@@ -41,7 +42,7 @@ const renderTextNode = (
   const { width: textWidth } = ctx.measureText(value);
 
   if (underline) {
-    renderUnderline(ctx, { x, y }, textWidth, fontSizeInPx);
+    renderUnderline(ctx, { x, y }, textWidth, fontSizeInPx, bold);
   }
 
   if (listeners) {
@@ -50,7 +51,7 @@ const renderTextNode = (
         "You must provide a renderer argument to createTextBuffer to use listeners (onClick, onMouseEnter, onMouseLeave)"
       );
     }
-    handleListeners(listeners, { x, y }, renderer, textWidth, fontSizeInPx);
+    handleListeners(listeners, { x, y }, renderer, textWidth, fontSizeInPx, underline, bold);
   }
 };
 
