@@ -60,6 +60,7 @@ declare module "rendering" {
 }
 declare module "main" {
     import { createTextBuffer } from "rendering";
+    export { createBuffer } from "utils/buffer";
     export default createTextBuffer;
 }
 //# sourceMappingURL=main.d.ts.map

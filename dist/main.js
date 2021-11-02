@@ -166,9 +166,11 @@ define("rendering", ["require", "exports", "constants", "listeners", "utils/buff
     };
     exports.createTextBuffer = createTextBuffer;
 });
-define("main", ["require", "exports", "rendering"], function (require, exports, rendering_1) {
+define("main", ["require", "exports", "rendering", "utils/buffer"], function (require, exports, rendering_1, buffer_2) {
     "use strict";
     Object.defineProperty(exports, "__esModule", { value: true });
+    exports.createBuffer = void 0;
+    Object.defineProperty(exports, "createBuffer", { enumerable: true, get: function () { return buffer_2.createBuffer; } });
     exports.default = rendering_1.createTextBuffer;
 });
 //# sourceMappingURL=main.js.map
