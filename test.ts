@@ -26,29 +26,6 @@ const optionModel = {
   ],
 }
 
-// const optionModel2 = {
-//   textNodes: [
-//     {
-//       value: "lorem ipsum blabla",
-//       styles: {
-//         underline: true,
-//         bold: false,
-//       }
-//     },
-//     {
-//       value: "idk what to write rly",
-//       styles: {
-//         underline: false,
-//         bold: true,
-//       }
-//     }
-//   ],
-//   commonStyles: {
-
-//   }
-// }
-
-
 const WIDTH = 500;
 const HEIGHT = 200;
 
@@ -59,7 +36,6 @@ const rendererCtx = renderer?.getContext('2d');
 
 
 const text1 = createTextBuffer(WIDTH, HEIGHT, optionModel, renderer);
-//const text2 = createTextBuffer(WIDTH, HEIGHT, optionModel2);
 
 console.log(text1)
 rendererCtx?.drawImage(text1, 0, 0);
