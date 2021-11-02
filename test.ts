@@ -1,4 +1,4 @@
-import { createTextBuffer } from "./src/main";
+import createTextBuffer from "./src/main";
 
 const optionModel = {
   textNodes: [

@@ -1,4 +1,4 @@
-import { Unit, ValueAndUnit } from "../types";
+import { Position, Unit, ValueAndUnit } from "../types";
 
 const convertRemToPixels = (rem: number) => {
   return rem * parseFloat(getComputedStyle(document.documentElement).fontSize);
@@ -23,4 +23,8 @@ export const convertUnitInPx = (valueAndUnit: ValueAndUnit) => {
   };
 
   return unitMap[unit](value);
+};
+
+export const getPositionInPx = (position: Position, fontSize: number) => {
+  return [position.x, position.y].map((pos) => convertUnitInPx(pos) + fontSize);
 };
