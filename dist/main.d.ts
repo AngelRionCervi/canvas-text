@@ -1,3 +1,7 @@
+declare module "constants" {
+    export const UNDERLINE_DISTANCE_FROM_BOTTOM = 3;
+    export const UNDERLINE_HEIGHT: (fontSizeInPx: number) => number;
+}
 declare module "types" {
     export type Unit = "px" | "rem";
     export type ValueAndUnit = string | number;
@@ -9,7 +13,12 @@ declare module "types" {
         x: number;
         y: number;
     };
-    export type Styles = {
+    export interface Listeners {
+        onClick?: (evt: Event) => void;
+        onMouseEnter?: (evt: Event) => void;
+        onMouseLeave?: (evt: Event) => void;
+    }
+    export interface Styles {
         position: Position;
         underline: boolean;
         bold: boolean;
@@ -17,15 +26,22 @@ declare module "types" {
         color: string;
         font: string;
         fontSize: ValueAndUnit;
-    };
+    }
     export interface TextNode {
         value: string;
         styles: Partial<Styles>;
+        onClick?: () => void;
+        onMouseEnter?: () => void;
+        onMouseLeave?: () => void;
     }
     export interface TextModel {
         textNodes: TextNode[];
         commonStyles?: Partial<Styles>;
     }
+}
+declare module "listeners" {
+    import { Listeners, PositionInPx } from "types";
+    export const handleListeners: (listeners: Listeners, textRelativePos: PositionInPx, renderer: HTMLCanvasElement, textWidth: number, fontSizeInPx: number) => void;
 }
 declare module "utils/buffer" {
     export const createBuffer: (width: number, height: number) => {
@@ -34,11 +50,16 @@ declare module "utils/buffer" {
     };
 }
 declare module "utils/unitConversion" {
-    import { ValueAndUnit } from "types";
+    import { Position, ValueAndUnit } from "types";
     export const convertUnitInPx: (valueAndUnit: ValueAndUnit) => number;
+    export const getPositionInPx: (position: Position, fontSize: number) => number[];
+}
+declare module "rendering" {
+    import { TextModel } from "types";
+    export const createTextBuffer: (width: number, height: number, options: TextModel, renderer?: HTMLCanvasElement | undefined) => HTMLCanvasElement;
 }
 declare module "main" {
-    import { TextModel } from "types";
-    export const createTextBuffer: (width: number, height: number, options: TextModel) => HTMLCanvasElement;
+    import { createTextBuffer } from "rendering";
+    export default createTextBuffer;
 }
 //# sourceMappingURL=main.d.ts.map
