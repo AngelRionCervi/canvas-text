@@ -2,7 +2,7 @@
   "compilerOptions": {
     "target": "es5",
     "useDefineForClassFields": true,
-    "module": "amd",
+    "module": "commonjs",
     "lib": ["ESNext", "dom"],
     "moduleResolution": "Node",
     "strict": true,
@@ -12,7 +12,7 @@
     "noUnusedLocals": true,
     "noUnusedParameters": true,
     "noImplicitReturns": true,
-    "outFile": "./dist/main.js",            
+    "outDir": "./dist",            
     "rootDir": "./src",   
     "declaration": true,
     "declarationMap": true, 
